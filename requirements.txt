@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+pandas
+numpy
+scikit-learn
+xgboost
+joblib
+mlflow
+psycopg2-binary
+sqlalchemy
+prometheus-client
+python-multipart
+pydantic
+requests
+python-dotenv
+boto3
