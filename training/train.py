@@ -52,8 +52,10 @@ os.makedirs(MODEL_DIR, exist_ok=True)
 # MinIO Configuration
 # ---------------------------------------------------
 
-MINIO_ENDPOINT = "http://minio:9000"
-
+MINIO_ENDPOINT = os.getenv(
+    "MINIO_ENDPOINT",
+    "http://minio-service:9000"
+)
 MINIO_ACCESS_KEY = "minioadmin"
 
 MINIO_SECRET_KEY = "minioadmin"
