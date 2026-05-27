@@ -1,0 +1,16 @@
+apiVersion: v1
+
+kind: PersistentVolumeClaim
+
+metadata:
+  name: minio-pvc
+  namespace: smartpredict
+
+spec:
+  accessModes:
+    - ReadWriteOnce
+
+  resources:
+    requests:
+      storage: 5Giy
+

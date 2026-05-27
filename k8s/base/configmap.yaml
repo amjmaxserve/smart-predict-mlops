@@ -1,0 +1,12 @@
+apiVersion: v1
+
+kind: ConfigMap
+
+metadata:
+  name: smartpredict-config
+  namespace: smartpredict
+
+data:
+  MINIO_ENDPOINT: "http://minio-service:9000"
+  MINIO_BUCKET: "models"
+  APP_NAME: "smartpredict-mlops"

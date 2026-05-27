@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+
+kind: Job
+
+metadata:
+  name: model-training
+  namespace: smartpredict
+
+spec:
+
+  template:
+
+    spec:
+
+      restartPolicy: Never
+
+      containers:
+
+      - name: trainer
+
+        image: smartpredict-api:v1
+
+        imagePullPolicy: Never
+
+        command: ["python"]
+
+        args: ["training/train.py"]
+
+        env:
+
+        - name: MINIO_ENDPOINT
+          value: "http://minio-service:9000"
+
+        - name: MINIO_BUCKET
+          value: "models"
+
+        - name: MINIO_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: smartpredict-secrets
+              key: MINIO_ACCESS_KEY
+
+        - name: MINIO_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: smartpredict-secrets
+              key: MINIO_SECRET_KEY

@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: fastapi
+  namespace: smartpredict
+
+  labels:
+    app: fastapi
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: fastapi
+
+  template:
+
+    metadata:
+      labels:
+        app: fastapi
+
+    spec:
+
+      containers:
+
+      - name: fastapi
+
+        image: smartpredict-api:v1
+
+        imagePullPolicy: Never
+
+        ports:
+        - containerPort: 8000
+
+        env:
+
+        - name: MINIO_ENDPOINT
+          valueFrom:
+            configMapKeyRef:
+              name: smartpredict-config
+              key: MINIO_ENDPOINT
+
+        - name: MINIO_BUCKET
+          valueFrom:
+            configMapKeyRef:
+              name: smartpredict-config
+              key: MINIO_BUCKET
+
+        - name: MINIO_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: smartpredict-secrets
+              key: MINIO_ACCESS_KEY
+
+        - name: MINIO_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: smartpredict-secrets
+              key: MINIO_SECRET_KEY
